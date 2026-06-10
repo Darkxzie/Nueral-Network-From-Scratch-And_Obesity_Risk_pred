@@ -1,0 +1,6 @@
+- [x] Normalize the neural network notebook path and remove unrelated artifacts.
+- [x] Add Python tooling metadata and compliance configs.
+- [x] Add GitLab CI and pre-commit definitions.
+- [x] Add Spec-Kit scaffolding.
+- [ ] Run verification commands and fix any issues.
+- [ ] Push the submission branch to GitHub and Swecha GitLab.

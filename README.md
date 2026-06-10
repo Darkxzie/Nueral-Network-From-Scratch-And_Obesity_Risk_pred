@@ -1,71 +1,75 @@
-# DevSoc Core Assignments 2025–26
+# Swecha Neural Network Submission Pack
 
-Welcome to the repository for the **DevSoc Core Assignment 2025–26**, submitted as part of the application process for the AI/ML vertical of **DevSoc (Developers' Society, BITS Goa)**.
+This repository is a submission-ready packaging of a neural-network-from-scratch notebook prepared for Swecha-style review workflows. The original modeling work is preserved, while the repository structure, documentation, and compliance tooling have been refreshed so it can be pushed through branch-based GitHub and GitLab review.
 
----
+## Included Artifact
 
-##  Project Summary
+### `notebooks/neural_network_from_scratch.ipynb`
 
-This submission contains two core AI/ML projects:
+A handwritten MNIST digit classifier built around manual forward propagation, backpropagation, ReLU, softmax, cross-entropy loss, and SGD updates. The notebook uses NumPy for the network implementation and pulls MNIST from `tensorflow.keras.datasets`.
 
-1. **Obesity Risk Prediction** using ensemble machine learning techniques
-2. **MNIST Digit Classification** using a fully manual neural network built from scratch using only NumPy (no ML libraries)
+## Repository Layout
 
----
+```text
+.
+|-- notebooks/
+|   `-- neural_network_from_scratch.ipynb
+|-- submission_artifacts/
+|   `-- metadata.py
+|-- tests/
+|   `-- test_submission_artifacts.py
+|-- .specify/
+|-- specs/
+|   `-- swecha-submission-compliance/
+|-- README.md
+|-- CONTRIBUTING.md
+|-- SECURITY.md
+|-- pyproject.toml
+`-- requirements-dev.txt
+```
 
-##  Notebooks
+## Quick Start
 
-### 1. `2024ADPS0026G_ObesityRiskPrediction.ipynb`
+Install repository maintenance dependencies:
 
-> Predicts an individual’s obesity category based on lifestyle, health, and demographic features.
+```bash
+pip install -r requirements-dev.txt
+```
 
-Includes:
-- Data preprocessing and feature encoding
-- Baseline model (Logistic Regression)
-- Ensemble models: Random Forest, Gradient Boosting, XGBoost
-- Soft Voting Ensemble
-- Evaluation using accuracy, F1-score, and confusion matrix
-- Clear visualization of model performance
+Install notebook runtime dependencies only if you want to rerun the notebooks:
 
----
+```bash
+pip install -r requirements-notebooks.txt
+```
 
-### 2. `2024ADPS0026G_MNIST_Neural_Network_From_Scratch.ipynb`
+## Compliance Checks
 
-> A full neural network implementation without using any ML libraries like TensorFlow or PyTorch.
+The repository now includes explicit root-level checks modeled on the `waterwatch` compliance setup:
 
-Includes:
-- Forward and backward propagation
-- ReLU and softmax activation
-- Cross-entropy loss
-- Manual weight updates with SGD
-- Accuracy, confusion matrix, and weight visualization
-- Trained on MNIST dataset with 97.9%+ test accuracy
+- formatting: `python -m black --check submission_artifacts tests` and `python -m nbqa black --check notebooks/neural_network_from_scratch.ipynb`
+- linting: `python -m ruff check submission_artifacts tests` and `python -m nbqa ruff notebooks/neural_network_from_scratch.ipynb --ignore=E501`
+- type-checking: `python -m mypy submission_artifacts`
+- tests and coverage: `python -m pytest`
+- dependency audit: `python -m pip_audit -r requirements-dev.txt`
+- secret scanning: `gitleaks git . --config .gitleaks.toml --redact --no-banner`
+- dead-code detection: `python -m vulture submission_artifacts tests --min-confidence 80`
 
----
+These same checks are wired into `.gitlab-ci.yml` and `.pre-commit-config.yaml`.
 
-##  Report
+## Spec-Kit
 
-The compiled LaTeX report [`DevSoc_REPORT.pdf`](./DevSoc_REPORT.pdf) includes:
+Lightweight Spec-Kit scaffolding is present under `.specify/` and `specs/`.
 
-- Overview of both projects
-- Methodology and implementation details
-- Mathematical formulations
-- Evaluation metrics, results tables, and plots
-- Visualizations (confusion matrices, first-layer weights)
+- `.specify/memory/constitution.md` records repository rules.
+- `.specify/templates/` contains reusable spec, plan, and task templates.
+- `specs/swecha-submission-compliance/` captures the compliance refresh applied to this repo.
 
----
+## Colab Links
 
-##  Google Colab Links
-
-| Project | Link |
-|--------|------|
-| Ensemble Learning | [Open in Colab](https://colab.research.google.com/drive/1biMOXV2iZpNHziel52ujApYgp7sIj6Tk) |
+| Artifact | Link |
+| --- | --- |
 | Neural Network From Scratch | [Open in Colab](https://colab.research.google.com/drive/1ToCk_H3EcrSDSRa1icoB382aAZraj66D) |
 
----
+## Author
 
-##  Author
-
-**Kamal Kumar Manchenella**  
-BITS Pilani, Goa Campus  
-DevSoc Core Assignment Submission – AI/ML Vertical  
+Kamal Kumar Manchenella
