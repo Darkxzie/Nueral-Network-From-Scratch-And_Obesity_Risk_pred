@@ -1,6 +1,14 @@
 # Swecha Neural Network Submission Pack
 
-This repository is a submission-ready packaging of a neural-network-from-scratch notebook prepared for Swecha-style review workflows. The original modeling work is preserved, while the repository structure, documentation, and compliance tooling have been refreshed so it can be pushed through branch-based GitHub and GitLab review.
+This repository contains a neural network from scratch for MNIST digit classification. The model is implemented with NumPy-based forward propagation, backpropagation, softmax output, and SGD training, with TensorFlow used only to load the MNIST dataset.
+
+The repository is packaged for Swecha-style submission and review, with documentation, compliance tooling, and branch-based delivery already set up.
+
+## About This Project
+
+This project demonstrates how a feedforward neural network works without relying on high-level training frameworks such as PyTorch or Keras for the model itself. The notebook walks through data preparation, one-hot encoding, parameter initialization, forward and backward passes, minibatch training, and evaluation on handwritten digit images.
+
+The goal is not just to reach a good accuracy score. It is to show the mechanics of neural network training clearly enough that a reviewer can inspect each major step and understand how the classifier is built.
 
 ## Included Artifact
 
@@ -89,4 +97,4 @@ Lightweight Spec-Kit scaffolding is present under `.specify/` and `specs/`.
 
 ## Author
 
-Kamal Kumar Manchenella
+[Kamal Kumar Manchenella](https://code.swecha.org/Kamel)
