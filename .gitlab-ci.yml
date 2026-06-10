@@ -1,0 +1,80 @@
+image: python:3.12
+
+stages:
+  - install
+  - format
+  - lint
+  - type_check
+  - test
+  - coverage
+  - security
+
+cache:
+  key:
+    files:
+      - requirements-dev.txt
+  paths:
+    - .cache/pip
+
+default:
+  before_script:
+    - python -m pip install --upgrade pip
+    - pip install -r requirements-dev.txt
+
+install:
+  stage: install
+  script:
+    - python -m pip install --upgrade pip
+    - pip install -r requirements-dev.txt
+
+format:
+  stage: format
+  needs: ["install"]
+  script:
+    - python -m black --check submission_artifacts tests
+    - python -m nbqa black --check notebooks/neural_network_from_scratch.ipynb
+
+lint:
+  stage: lint
+  needs: ["install"]
+  script:
+    - python -m ruff check submission_artifacts tests
+    - python -m nbqa ruff notebooks/neural_network_from_scratch.ipynb --ignore=E501
+
+type_check:
+  stage: type_check
+  needs: ["install"]
+  script:
+    - python -m mypy submission_artifacts
+
+test:
+  stage: test
+  needs: ["install"]
+  script:
+    - python -m pytest
+
+coverage:
+  stage: coverage
+  needs: ["install"]
+  script:
+    - python -m pytest --cov=submission_artifacts --cov-report=term-missing --cov-fail-under=80
+
+dependency_audit:
+  stage: security
+  needs: ["install"]
+  script:
+    - python -m pip_audit -r requirements-dev.txt
+
+secret_scanning:
+  stage: security
+  needs: ["install"]
+  image: zricethezav/gitleaks:8.18.4
+  before_script: []
+  script:
+    - gitleaks git . --config .gitleaks.toml --redact --no-banner
+
+dead_code:
+  stage: security
+  needs: ["install"]
+  script:
+    - python -m vulture submission_artifacts tests --min-confidence 80

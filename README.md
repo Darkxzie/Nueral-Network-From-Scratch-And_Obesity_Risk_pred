@@ -1,71 +1,100 @@
-# DevSoc Core Assignments 2025–26
+# Swecha Neural Network Submission Pack
 
-Welcome to the repository for the **DevSoc Core Assignment 2025–26**, submitted as part of the application process for the AI/ML vertical of **DevSoc (Developers' Society, BITS Goa)**.
+This repository contains a neural network from scratch for MNIST digit classification. The model is implemented with NumPy-based forward propagation, backpropagation, softmax output, and SGD training, with TensorFlow used only to load the MNIST dataset.
 
----
+The repository is packaged for Swecha-style submission and review, with documentation, compliance tooling, and branch-based delivery already set up.
 
-##  Project Summary
+## About This Project
 
-This submission contains two core AI/ML projects:
+This project demonstrates how a feedforward neural network works without relying on high-level training frameworks such as PyTorch or Keras for the model itself. The notebook walks through data preparation, one-hot encoding, parameter initialization, forward and backward passes, minibatch training, and evaluation on handwritten digit images.
 
-1. **Obesity Risk Prediction** using ensemble machine learning techniques
-2. **MNIST Digit Classification** using a fully manual neural network built from scratch using only NumPy (no ML libraries)
+The goal is not just to reach a good accuracy score. It is to show the mechanics of neural network training clearly enough that a reviewer can inspect each major step and understand how the classifier is built.
 
----
+## Included Artifact
 
-##  Notebooks
+### `notebooks/neural_network_from_scratch.ipynb`
 
-### 1. `2024ADPS0026G_ObesityRiskPrediction.ipynb`
+A handwritten MNIST digit classifier built around manual forward propagation, backpropagation, ReLU, softmax, cross-entropy loss, and SGD updates. The notebook uses NumPy for the network implementation and pulls MNIST from `tensorflow.keras.datasets`.
 
-> Predicts an individual’s obesity category based on lifestyle, health, and demographic features.
+## Repository Layout
 
-Includes:
-- Data preprocessing and feature encoding
-- Baseline model (Logistic Regression)
-- Ensemble models: Random Forest, Gradient Boosting, XGBoost
-- Soft Voting Ensemble
-- Evaluation using accuracy, F1-score, and confusion matrix
-- Clear visualization of model performance
+```text
+.
+|-- notebooks/
+|   `-- neural_network_from_scratch.ipynb
+|-- submission_artifacts/
+|   `-- metadata.py
+|-- tests/
+|   `-- test_submission_artifacts.py
+|-- .specify/
+|-- specs/
+|   `-- swecha-submission-compliance/
+|-- LICENSE
+|-- USER_MANUAL.md
+|-- README.md
+|-- CONTRIBUTING.md
+|-- SECURITY.md
+|-- pyproject.toml
+`-- requirements-dev.txt
+```
 
----
+## Quick Start
 
-### 2. `2024ADPS0026G_MNIST_Neural_Network_From_Scratch.ipynb`
+Install repository maintenance dependencies:
 
-> A full neural network implementation without using any ML libraries like TensorFlow or PyTorch.
+```bash
+pip install -r requirements-dev.txt
+```
 
-Includes:
-- Forward and backward propagation
-- ReLU and softmax activation
-- Cross-entropy loss
-- Manual weight updates with SGD
-- Accuracy, confusion matrix, and weight visualization
-- Trained on MNIST dataset with 97.9%+ test accuracy
+Install notebook runtime dependencies only if you want to rerun the notebooks:
 
----
+```bash
+pip install -r requirements-notebooks.txt
+```
 
-##  Report
+## Compliance Checks
 
-The compiled LaTeX report [`DevSoc_REPORT.pdf`](./DevSoc_REPORT.pdf) includes:
+The repository now includes explicit root-level checks modeled on the `waterwatch` compliance setup:
 
-- Overview of both projects
-- Methodology and implementation details
-- Mathematical formulations
-- Evaluation metrics, results tables, and plots
-- Visualizations (confusion matrices, first-layer weights)
+- formatting: `python -m black --check submission_artifacts tests` and `python -m nbqa black --check notebooks/neural_network_from_scratch.ipynb`
+- linting: `python -m ruff check submission_artifacts tests` and `python -m nbqa ruff notebooks/neural_network_from_scratch.ipynb --ignore=E501`
+- type-checking: `python -m mypy submission_artifacts`
+- tests and coverage: `python -m pytest`
+- dependency audit: `python -m pip_audit -r requirements-dev.txt`
+- secret scanning: `gitleaks git . --config .gitleaks.toml --redact --no-banner`
+- dead-code detection: `python -m vulture submission_artifacts tests --min-confidence 80`
 
----
+These same checks are wired into `.gitlab-ci.yml` and `.pre-commit-config.yaml`.
 
-##  Google Colab Links
+## License
 
-| Project | Link |
-|--------|------|
-| Ensemble Learning | [Open in Colab](https://colab.research.google.com/drive/1biMOXV2iZpNHziel52ujApYgp7sIj6Tk) |
+This repository is licensed under the GNU Affero General Public License v3.0.
+The full license text is included in the root `LICENSE` file.
+
+## Documentation And Operations Files
+
+The root of the repository now includes:
+
+- `USER_MANUAL.md` for reviewer and contributor usage
+- `.editorconfig` for editor-level formatting consistency
+- `CODE_OF_CONDUCT.md` for community standards
+- `.env.example` to document non-secret environment expectations
+- `Dockerfile` and `.dockerignore` for containerized verification
+
+## Spec-Kit
+
+Lightweight Spec-Kit scaffolding is present under `.specify/` and `specs/`.
+
+- `.specify/memory/constitution.md` records repository rules.
+- `.specify/templates/` contains reusable spec, plan, and task templates.
+- `specs/swecha-submission-compliance/` captures the compliance refresh applied to this repo.
+
+## Colab Links
+
+| Artifact | Link |
+| --- | --- |
 | Neural Network From Scratch | [Open in Colab](https://colab.research.google.com/drive/1ToCk_H3EcrSDSRa1icoB382aAZraj66D) |
 
----
+## Author
 
-##  Author
-
-**Kamal Kumar Manchenella**  
-BITS Pilani, Goa Campus  
-DevSoc Core Assignment Submission – AI/ML Vertical  
+[Kamal Kumar Manchenella](https://code.swecha.org/Kamel)

@@ -1,0 +1,9 @@
+title = "Swecha Submission Secret Scanning Rules"
+
+[allowlist]
+description = "Allow notebook metadata and documentation examples."
+paths = [
+  '''CHANGELOG\.md''',
+  '''README\.md'''
+]
+
