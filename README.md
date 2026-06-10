@@ -21,6 +21,8 @@ A handwritten MNIST digit classifier built around manual forward propagation, ba
 |-- .specify/
 |-- specs/
 |   `-- swecha-submission-compliance/
+|-- LICENSE
+|-- USER_MANUAL.md
 |-- README.md
 |-- CONTRIBUTING.md
 |-- SECURITY.md
@@ -55,6 +57,21 @@ The repository now includes explicit root-level checks modeled on the `waterwatc
 - dead-code detection: `python -m vulture submission_artifacts tests --min-confidence 80`
 
 These same checks are wired into `.gitlab-ci.yml` and `.pre-commit-config.yaml`.
+
+## License
+
+This repository is licensed under the GNU Affero General Public License v3.0.
+The full license text is included in the root `LICENSE` file.
+
+## Documentation And Operations Files
+
+The root of the repository now includes:
+
+- `USER_MANUAL.md` for reviewer and contributor usage
+- `.editorconfig` for editor-level formatting consistency
+- `CODE_OF_CONDUCT.md` for community standards
+- `.env.example` to document non-secret environment expectations
+- `Dockerfile` and `.dockerignore` for containerized verification
 
 ## Spec-Kit
 

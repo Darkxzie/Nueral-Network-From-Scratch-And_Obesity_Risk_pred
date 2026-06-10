@@ -33,6 +33,9 @@ python -m vulture submission_artifacts tests --min-confidence 80
 gitleaks git . --config .gitleaks.toml --redact --no-banner
 ```
 
+The dependency audit step is required documentation and should stay green before
+opening a PR or MR.
+
 ## Pre-commit
 
 Optional `pre-commit` integration is included:
